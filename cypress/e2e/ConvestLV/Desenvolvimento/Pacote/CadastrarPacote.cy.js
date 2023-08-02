@@ -57,7 +57,7 @@ context('Teta a Página de Login do Conves LV', () => {
         cy.get('#MainContent_TotalPacote').should('contain','9')
 
     });
-    it('Teste 7 vezes no que esta Falhando', () => {
+    it('Tentando Gerar pacotes acima da Quantidade de peças', () => {
         var tempo=100;
         cy.get('#MainContent_NumeroOS').type('7202')
         cy.get('#MainContent_Item').focus()

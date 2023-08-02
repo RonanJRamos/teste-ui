@@ -1,5 +1,5 @@
 
-context('Teta a Página de Login do Conves LV', () => {
+context('Testa a Página de Login do Conves LV', () => {
     beforeEach(() => {
         cy.visit("http://localhost:3585/Default.aspx")
     });
@@ -12,7 +12,7 @@ context('Teta a Página de Login do Conves LV', () => {
         // failing the test
         return false
       })
-    it.only('Deve fazer Login com sucesso',()=>{
+    it('Deve fazer Login com sucesso',()=>{
         cy.get('#Empresa').type("PL")
         cy.get('#Usuario').type('Integracao')
         cy.get('#Senha').type('Integracao')
