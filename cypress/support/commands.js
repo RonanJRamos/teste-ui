@@ -23,3 +23,24 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add("Limpar_cadastro", () => { 
+    cy.get('#MainContent_Tamanho').clear();
+    cy.get('#MainContent_QuantidadePacote').clear();
+    cy.get('#MainContent_QuantidadePecas').clear();
+})
+Cypress.Commands.add("PreencherLancamentoPacote", (tamanho,qtdePacote,qtdePecas,tempo) => { 
+        cy.get('#MainContent_Tamanho').type(tamanho);
+        cy.get('#MainContent_QuantidadePacote').type(qtdePacote);
+        cy.get('#MainContent_QuantidadePecas').type(qtdePecas);
+        cy.get('#MainContent_CmdLancar').click();
+        cy.wait(tempo);
+})
+Cypress.Commands.add("logar", (empresa,usuario,senha) => { 
+        cy.visit("http://localhost:3585/Default.aspx")
+        cy.get('#Empresa').type(empresa)
+        cy.get('#Usuario').type(usuario)
+        cy.get('#Senha').type(senha)
+        cy.get('#CmdConfirmar').click()
+       
+})
