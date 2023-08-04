@@ -1,5 +1,5 @@
 
-context('Teta a Página de Login do Conves LV', () => {
+context('TeSta a Página de Login do Conves LV', () => {
     beforeEach(() => {
         cy.logar('PL','Integracao','Integracao')
         cy.visit("http://localhost:3585/Views/Pacotes/CadastroPacote.aspx")
@@ -13,6 +13,17 @@ context('Teta a Página de Login do Conves LV', () => {
         // failing the test
         return false
       })
+      it('Exclui os Pacotes', () => {
+        cy.visit('http://localhost:3585/liberasenhamaster.aspx?Opcao=2')
+        cy.get('#Usuario').type('Integracao')
+        cy.get('#Senha').type('Integracao')
+        cy.get('#CmdLiberar').click()
+        cy.get('#MainContent_OS').type('007202')
+        cy.get('#MainContent_Item').type('6')
+        cy.get('#MainContent_CmdExcluir').click()
+
+
+      });
       it('Verificar se OS Existe',()=>{
         var tempo=80;
         cy.get('#MainContent_NumeroOS').type('7202')
@@ -27,13 +38,13 @@ context('Teta a Página de Login do Conves LV', () => {
         cy.wait(tempo)
         cy.get('#MainContent_Msg').should('contain','Numero da O.S inexistente.')
     });
-    it('Teste Lancamento via Comano', () => {
+    it('Teste Lancamento via Comando', () => {
         cy.Limpar_cadastro()
         cy.PreencherLancamentoPacote('M',1,8,50)
     });
     it('Cadastro dos Pacotes ', () => {
         
-        var tempo=100;
+        var tempo=80;
         cy.get('#MainContent_NumeroOS').type('7202')
         cy.get('#MainContent_Item').focus()
         cy.wait(tempo)
@@ -58,7 +69,7 @@ context('Teta a Página de Login do Conves LV', () => {
 
     });
     it('Tentando Gerar pacotes acima da Quantidade de peças', () => {
-        var tempo=100;
+        var tempo=80;
         cy.get('#MainContent_NumeroOS').type('7202')
         cy.get('#MainContent_Item').focus()
         cy.wait(tempo)
@@ -107,7 +118,7 @@ context('Teta a Página de Login do Conves LV', () => {
         cy.get('#MainContent_TotalPacote').should('contain','3')
      });
     it('Cadastro dos Pacotes - Qtde acima da Qtde da OS', () => {
-         var tempo=50;
+         var tempo=80;
         cy.get('#MainContent_NumeroOS').type('7202')
         cy.get('#MainContent_Item').focus()
         cy.wait(tempo)
@@ -142,7 +153,7 @@ context('Teta a Página de Login do Conves LV', () => {
 
     });
     it('Verificar Quantidade de Pacote', () => {
-        var tempo=50;
+        var tempo=80;
         cy.get('#MainContent_NumeroOS').type('7202')
         cy.get('#MainContent_Item').focus()
         cy.wait(tempo)
@@ -159,7 +170,7 @@ context('Teta a Página de Login do Conves LV', () => {
         cy.get('#MainContent_TotalPacote').should('contain','5')
     });
     it('Testa Tamanho que não esta na OS', () => {
-        var tempo=50;
+        var tempo=80;
         cy.get('#MainContent_NumeroOS').type('7202')
         cy.get('#MainContent_Item').focus()
         cy.wait(tempo)
@@ -234,7 +245,7 @@ context('Teta a Página de Login do Conves LV', () => {
 
     });
     it('Exclusão de item lnaçado para cadastro do Pacote', () => {
-        var tempo=100;
+        var tempo=80;
         cy.get('#MainContent_NumeroOS').type('7202')
         cy.get('#MainContent_Item').focus()
         cy.wait(tempo)
@@ -288,7 +299,7 @@ context('Teta a Página de Login do Conves LV', () => {
     });
    
     it('Salvar os Pacotes ', () => {
-        var tempo=100;
+        var tempo=80;
         cy.get('#MainContent_NumeroOS').type('7202')
         cy.get('#MainContent_Item').focus()
         cy.wait(tempo)
@@ -317,7 +328,7 @@ context('Teta a Página de Login do Conves LV', () => {
 
     });
     it('Tenta  Salvar Pacote depois de salvo os totais', () => {
-        var tempo=100;
+        var tempo=80;
         cy.get('#MainContent_NumeroOS').type('7202')
         cy.get('#MainContent_Item').focus()
         cy.wait(tempo)
