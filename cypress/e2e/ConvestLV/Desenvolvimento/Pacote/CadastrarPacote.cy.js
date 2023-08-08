@@ -1,5 +1,5 @@
 
-context('TeSta a Página de Login do Conves LV', () => {
+context('Testa a Pagina de cadastro de pacote', () => {
     beforeEach(() => {
         cy.logar('PL','Integracao','Integracao')
         cy.visit("http://localhost:3585/Views/Pacotes/CadastroPacote.aspx")
@@ -44,7 +44,7 @@ context('TeSta a Página de Login do Conves LV', () => {
     });
     it('Cadastro dos Pacotes ', () => {
         
-        var tempo=80;
+        var tempo=120;
         cy.get('#MainContent_NumeroOS').type('7202')
         cy.get('#MainContent_Item').focus()
         cy.wait(tempo)
@@ -66,6 +66,9 @@ context('TeSta a Página de Login do Conves LV', () => {
         cy.Limpar_cadastro()
         cy.get('#MainContent_TotalPecas').should('contain','50')
         cy.get('#MainContent_TotalPacote').should('contain','9')
+        cy.wait(tempo)
+        cy.get('#MainContent_CmdBordado').should('be.disabled')
+
 
     });
     it('Tentando Gerar pacotes acima da Quantidade de peças', () => {
@@ -297,8 +300,7 @@ context('TeSta a Página de Login do Conves LV', () => {
         cy.get('#MainContent_TotalPecas').should('contain','0')
         cy.get('#MainContent_TotalPacote').should('contain','0')
     });
-   
-    it('Salvar os Pacotes ', () => {
+    it.only('Salvar os Pacotes ', () => {
         var tempo=80;
         cy.get('#MainContent_NumeroOS').type('7202')
         cy.get('#MainContent_Item').focus()
@@ -325,6 +327,12 @@ context('TeSta a Página de Login do Conves LV', () => {
 
         cy.get('#MainContent_CmdConfirmar').click()
         cy.get('#MainContent_Msg0').should('contain','Pacotes gerados com sucesso!')
+        cy.wait(tempo)
+        cy.get('#MainContent_CmdBordado').should('be.disabled')
+        cy.get('#MainContent_CmdTransfer').should('be.disabled')
+        cy.get('#MainContent_CmdOutros').should('be.disabled')
+        cy.get('#MainContent_CmdSilk').click()
+        
 
     });
     it('Tenta  Salvar Pacote depois de salvo os totais', () => {
